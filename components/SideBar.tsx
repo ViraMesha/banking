@@ -52,7 +52,9 @@ export const SideBar = ({ user }: SiderbarProps) => {
             );
           })}
         </ul>
+        USER
       </nav>
+      FOOTER
     </section>
   );
 };
