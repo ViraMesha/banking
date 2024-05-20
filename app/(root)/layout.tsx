@@ -8,18 +8,18 @@ export default function RootLayout({
 }>) {
   const loggedIn = {
     $id: "sdfg",
-    email: "dfgh",
+    email: "john.doe@example.com",
     userId: "qsdfgh",
-    dwollaCustomerUrl: "wfgh",
+    dwollaCustomerUrl: "https://api.dwolla.com/customers/sdfgh",
     dwollaCustomerId: "sdfgh",
-    firstName: "Vira",
-    lastName: "Mesha",
-    address1: "werfgh",
-    city: "ergh",
-    state: "Sdf",
-    postalCode: "71679",
-    dateOfBirth: "fghj",
-    ssn: "dfghj",
+    firstName: "John",
+    lastName: "Doe",
+    address1: "123 Main St",
+    city: "Springfield",
+    state: "IL",
+    postalCode: "62704",
+    dateOfBirth: "1985-08-15",
+    ssn: "123-45-6789",
   };
   return (
     <main className="flex h-screen w-full font-inter">

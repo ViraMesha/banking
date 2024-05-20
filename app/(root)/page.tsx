@@ -1,8 +1,20 @@
-import { HeaderBox, TotalBalanceBox } from "@/components/index";
+import { HeaderBox, RightSideBar, TotalBalanceBox } from "@/components/index";
 
 const Home = () => {
   const loggedIn = {
-    firstName: "Vira",
+    $id: "sdfg",
+    email: "john.doe@example.com",
+    userId: "qsdfgh",
+    dwollaCustomerUrl: "https://api.dwolla.com/customers/sdfgh",
+    dwollaCustomerId: "sdfgh",
+    firstName: "John",
+    lastName: "Doe",
+    address1: "123 Main St",
+    city: "Springfield",
+    state: "IL",
+    postalCode: "62704",
+    dateOfBirth: "1985-08-15",
+    ssn: "123-45-6789",
   };
   return (
     <section className="home">
@@ -10,7 +22,7 @@ const Home = () => {
         <header className="home-header">
           <HeaderBox
             type="greeting"
-            title="Welcome"
+            title="Welcome,"
             userName={loggedIn?.firstName || "Guest"}
             subtext="Access and manage your account and transactions efficiently."
           />
@@ -20,7 +32,9 @@ const Home = () => {
             totalCurrentBalance={25000.98}
           />
         </header>
+        RECENT TRANSACTIONS
       </div>
+      <RightSideBar user={loggedIn} transactions={[]} banks={[]} />
     </section>
   );
 };
