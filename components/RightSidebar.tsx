@@ -1,7 +1,10 @@
 import Image from "next/image";
 import Link from "next/link";
 
-export const RightSideBar = ({
+// components
+import { BankCard } from "./BankCard";
+
+export const RightSidebar = ({
   user,
   transactions,
   banks,
@@ -34,10 +37,22 @@ export const RightSideBar = ({
         </div>
         {banks?.length > 0 && (
           <div className="relative flex-center flex-1 flex-col gap-5">
-            <div className="relative z-10">BANK CARD 1</div>
+            <div className="relative z-10">
+              <BankCard
+                key={banks[0].$id}
+                account={banks[0]}
+                userName={`${firstName} ${lastName}`}
+                showBalance={false}
+              />
+            </div>
             {banks[1] && (
               <div className="absolute right-0 top-8 z-0 w-[90%]">
-                BANK CARD 2
+                <BankCard
+                  key={banks[1].$id}
+                  account={banks[1]}
+                  userName={`${firstName} ${lastName}`}
+                  showBalance={false}
+                />
               </div>
             )}
           </div>

@@ -1,4 +1,4 @@
-import { HeaderBox, RightSideBar, TotalBalanceBox } from "@/components/index";
+import { HeaderBox, RightSidebar, TotalBalanceBox } from "@/components/index";
 
 const Home = () => {
   const loggedIn = {
@@ -34,7 +34,7 @@ const Home = () => {
         </header>
         RECENT TRANSACTIONS
       </div>
-      <RightSideBar user={loggedIn} transactions={[]} banks={[]} />
+      <RightSidebar user={loggedIn} transactions={[]} banks={[]} />
     </section>
   );
 };
