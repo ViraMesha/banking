@@ -6,3 +6,4 @@ export { SideBar } from "./SideBar";
 export { MobileNav } from "./MobileNav";
 export { RightSidebar } from "./RightSidebar";
 export { BankCard } from "./BankCard";
+export { AuthForm } from "./AuthForm";
