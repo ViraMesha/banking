@@ -7,3 +7,4 @@ export { MobileNav } from "./MobileNav";
 export { RightSidebar } from "./RightSidebar";
 export { BankCard } from "./BankCard";
 export { AuthForm } from "./AuthForm";
+export { CustomInput } from "./CustomInput";
