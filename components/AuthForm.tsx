@@ -13,12 +13,14 @@ import { z } from "zod";
 import { CustomInput } from "./CustomInput";
 import { authFormSchema } from "@/lib/utils";
 import { Loader2 } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 type Props = {
   type: "sign-in" | "sign-up";
 };
 
 export const AuthForm = ({ type }: Props) => {
+  const router = useRouter();
   const [user, setUser] = useState(null);
   const [isLoading, setLoading] = useState(false);
 
@@ -34,13 +36,25 @@ export const AuthForm = ({ type }: Props) => {
   });
 
   // 2. Define a submit handler.
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    // Do something with the form values.
-    // ✅ This will be type-safe and validated.
+  const onSubmit = async (values: z.infer<typeof formSchema>) => {
+    const { email, password } = values;
     setLoading(true);
-    console.log(values);
-    setLoading(false);
-  }
+    try {
+      // Sing up with Appwrite & create plaid link token
+      if (type === "sign-up") {
+        // const newUser = await signUp(values);
+        // setUser(newUser)
+      }
+      if (type === "sign-in") {
+        // const response = await signIn({ email, password });
+        // if (response) router.push("/");
+      }
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <section className="auth-form">
@@ -92,6 +106,12 @@ export const AuthForm = ({ type }: Props) => {
                     name="address1"
                     label="Address"
                     placeholder="Enter your specific address"
+                  />
+                  <CustomInput
+                    control={form.control}
+                    name="city"
+                    label="City"
+                    placeholder="Enter your city"
                   />
                   <div className="flex gap-4">
                     <CustomInput
