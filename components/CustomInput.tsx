@@ -24,6 +24,7 @@ export const CustomInput = ({ control, name, label, placeholder }: Props) => {
               <Input
                 placeholder={placeholder}
                 className="input-class"
+                type={`${name === "password" ? "password" : "text"}`}
                 {...field}
               />
             </FormControl>
