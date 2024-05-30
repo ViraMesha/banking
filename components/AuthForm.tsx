@@ -38,12 +38,12 @@ export const AuthForm = ({ type }: Props) => {
 
   // 2. Define a submit handler.
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
-    const { email, password, dob } = values;
+    const { email, password } = values;
     setLoading(true);
     try {
       // Sing up with Appwrite & create plaid link token
       if (type === "sign-up") {
-        const newUser = await signUp({ ...values, dateOfBirth: dob || "" });
+        const newUser = await signUp(values);
         setUser(newUser);
       }
       if (type === "sign-in") {
@@ -131,7 +131,7 @@ export const AuthForm = ({ type }: Props) => {
                   <div className="flex gap-4">
                     <CustomInput
                       control={form.control}
-                      name="dob"
+                      name="dateOfBirth"
                       label="Date of Birth"
                       placeholder="yyyy-mm-dd"
                     />
