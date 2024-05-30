@@ -14,6 +14,7 @@ import { CustomInput } from "./CustomInput";
 import { authFormSchema } from "@/lib/utils";
 import { Loader2 } from "lucide-react";
 import { useRouter } from "next/navigation";
+import { signIn, signUp } from "@/lib/actions";
 
 type Props = {
   type: "sign-in" | "sign-up";
@@ -37,17 +38,17 @@ export const AuthForm = ({ type }: Props) => {
 
   // 2. Define a submit handler.
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
-    const { email, password } = values;
+    const { email, password, dob } = values;
     setLoading(true);
     try {
       // Sing up with Appwrite & create plaid link token
       if (type === "sign-up") {
-        // const newUser = await signUp(values);
-        // setUser(newUser)
+        const newUser = await signUp({ ...values, dateOfBirth: dob || "" });
+        setUser(newUser);
       }
       if (type === "sign-in") {
-        // const response = await signIn({ email, password });
-        // if (response) router.push("/");
+        const response = await signIn({ email, password });
+        if (response) router.push("/");
       }
     } catch (error) {
       console.error(error);
