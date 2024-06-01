@@ -75,7 +75,9 @@ export const AuthForm = ({ type }: Props) => {
           <h2 className="text-24 lg:text-36 font-semibold text-gray-900">
             {user ? "Link Account" : type === "sign-in" ? "Sign In" : "Sign Up"}
             <p className="text-16 font-normal text-gray-600">
-              {user ? "Link your account" : "Please enter your details"}
+              {user
+                ? "Link your account to get started"
+                : "Please enter your details"}
             </p>
           </h2>
         </div>
