@@ -1,21 +1,28 @@
 import { HeaderBox, RightSidebar, TotalBalanceBox } from "@/components/index";
+import { getLoggedInUser } from "@/lib/actions/user.actions";
 
-const Home = () => {
-  const loggedIn = {
-    $id: "sdfg",
-    email: "john.doe@example.com",
-    userId: "qsdfgh",
-    dwollaCustomerUrl: "https://api.dwolla.com/customers/sdfgh",
-    dwollaCustomerId: "sdfgh",
-    firstName: "John",
-    lastName: "Doe",
-    address1: "123 Main St",
-    city: "Springfield",
-    state: "IL",
-    postalCode: "62704",
-    dateOfBirth: "1985-08-15",
-    ssn: "123-45-6789",
-  };
+const Home = async () => {
+  let loggedIn = await getLoggedInUser();
+
+  if (!loggedIn) {
+    loggedIn = {
+      $id: "sdfg",
+      email: "john.doe@example.com",
+      userId: "qsdfgh",
+      dwollaCustomerUrl: "https://api.dwolla.com/customers/sdfgh",
+      dwollaCustomerId: "sdfgh",
+      firstName: "John",
+      lastName: "Doe",
+      name: "John Doe",
+      address1: "123 Main St",
+      city: "Springfield",
+      state: "IL",
+      postalCode: "62704",
+      dateOfBirth: "1985-08-15",
+      ssn: "123-45-6789",
+    };
+  }
+
   return (
     <section className="home">
       <div className="home-content">

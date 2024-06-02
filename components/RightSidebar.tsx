@@ -9,19 +9,18 @@ export const RightSidebar = ({
   transactions,
   banks,
 }: RightSidebarProps) => {
-  const { firstName, lastName, email } = user;
+  const { name, email } = user;
+
   return (
     <aside className="right-sidebar">
       <section className="flex flex-col pb-8">
         <div className="profile-banner" />
         <div className="profile">
           <div className="profile-img">
-            <span className="text-5xl font-bold text-blue-500">
-              {firstName[0]}
-            </span>
+            <span className="text-5xl font-bold text-blue-500">{name[0]}</span>
           </div>
           <div className="profile-details">
-            <h1 className="profile-name">{`${firstName} ${lastName}`}</h1>
+            <h1 className="profile-name">{name}</h1>
             <p className="profile-email">{email}</p>
           </div>
         </div>
@@ -41,7 +40,7 @@ export const RightSidebar = ({
               <BankCard
                 key={banks[0].$id}
                 account={banks[0]}
-                userName={`${firstName} ${lastName}`}
+                userName={name}
                 showBalance={false}
               />
             </div>
@@ -50,7 +49,7 @@ export const RightSidebar = ({
                 <BankCard
                   key={banks[1].$id}
                   account={banks[1]}
-                  userName={`${firstName} ${lastName}`}
+                  userName={name}
                   showBalance={false}
                 />
               </div>

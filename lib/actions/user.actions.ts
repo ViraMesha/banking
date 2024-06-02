@@ -5,10 +5,17 @@ import { createAdminClient, createSessionClient } from "../appwrite";
 import { cookies } from "next/headers";
 import { parseStringify } from "../utils";
 
+/**
+ * Signs in a user with the provided email and password.
+ * @param {SignInProps} email - The email of the user.
+ * @param {SignInProps} password - The password of the user.
+ * @returns {Promise<string>} A promise that resolves to a response string after signing in.
+ */
 export const signIn = async ({ email, password }: SignInProps) => {
   try {
     const { account } = await createSessionClient();
     const response = await account.createEmailPasswordSession(email, password);
+
     return parseStringify(response);
   } catch (error) {
     console.error("Error", error);
@@ -56,9 +63,11 @@ export const signUp = async (userData: SignUpParams) => {
 export async function getLoggedInUser() {
   try {
     const { account } = await createSessionClient();
+    console.log(await account.get());
     const user = await account.get();
     return parseStringify(user);
   } catch (error) {
+    console.error("Failed to get logged-in user:", error);
     return null;
   }
 }
