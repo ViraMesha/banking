@@ -60,14 +60,24 @@ export const signUp = async (userData: SignUpParams) => {
  * This function first creates a session client and then fetches the account details.
  * @returns {Promise<Object|null>} A promise that resolves with the account information if successful, or null if an error occurs.
  */
-export async function getLoggedInUser() {
+export const getLoggedInUser = async () => {
   try {
     const { account } = await createSessionClient();
-    console.log(await account.get());
     const user = await account.get();
     return parseStringify(user);
   } catch (error) {
     console.error("Failed to get logged-in user:", error);
     return null;
   }
-}
+};
+
+export const logOutAccount = async () => {
+  try {
+    const { account } = await createSessionClient();
+    cookies().delete("appwrite-session");
+    await account.deleteSession("current");
+  } catch (error) {
+    console.error("Failed to log out", error);
+    return null;
+  }
+};
