@@ -8,3 +8,4 @@ export { RightSidebar } from "./RightSidebar";
 export { BankCard } from "./BankCard";
 export { AuthForm } from "./AuthForm";
 export { CustomInput } from "./CustomInput";
+export { Footer } from "./Footer";

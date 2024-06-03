@@ -1,26 +1,32 @@
 import { MobileNav, SideBar } from "@/components/index";
+import { getLoggedInUser } from "@/lib/actions/user.actions";
 import Image from "next/image";
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const loggedIn = {
-    $id: "sdfg",
-    email: "john.doe@example.com",
-    userId: "qsdfgh",
-    dwollaCustomerUrl: "https://api.dwolla.com/customers/sdfgh",
-    dwollaCustomerId: "sdfgh",
-    firstName: "John",
-    lastName: "Doe",
-    address1: "123 Main St",
-    city: "Springfield",
-    state: "IL",
-    postalCode: "62704",
-    dateOfBirth: "1985-08-15",
-    ssn: "123-45-6789",
-  };
+  let loggedIn = await getLoggedInUser();
+
+  if (!loggedIn) {
+    loggedIn = {
+      $id: "sdfg",
+      email: "john.doe@example.com",
+      userId: "qsdfgh",
+      dwollaCustomerUrl: "https://api.dwolla.com/customers/sdfgh",
+      dwollaCustomerId: "sdfgh",
+      firstName: "John",
+      lastName: "Doe",
+      name: "John Doe",
+      address1: "123 Main St",
+      city: "Springfield",
+      state: "IL",
+      postalCode: "62704",
+      dateOfBirth: "1985-08-15",
+      ssn: "123-45-6789",
+    };
+  }
   return (
     <main className="flex h-screen w-full font-inter">
       <SideBar user={loggedIn} />
