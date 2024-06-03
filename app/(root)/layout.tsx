@@ -11,23 +11,7 @@ export default async function RootLayout({
   let loggedIn = await getLoggedInUser();
 
   if (!loggedIn) {
-    // redirect("/sign-in");
-    loggedIn = {
-      $id: "sdfg",
-      email: "john.doe@example.com",
-      userId: "qsdfgh",
-      dwollaCustomerUrl: "https://api.dwolla.com/customers/sdfgh",
-      dwollaCustomerId: "sdfgh",
-      firstName: "John",
-      lastName: "Doe",
-      name: "John Doe",
-      address1: "123 Main St",
-      city: "Springfield",
-      state: "IL",
-      postalCode: "62704",
-      dateOfBirth: "1985-08-15",
-      ssn: "123-45-6789",
-    };
+    redirect("/sign-in");
   }
   return (
     <main className="flex h-screen w-full font-inter">

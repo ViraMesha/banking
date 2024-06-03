@@ -5,12 +5,12 @@ import { useRouter } from "next/navigation";
 
 export const Footer = ({ user, type = "desktop" }: FooterProps) => {
   const router = useRouter();
-  const { firstName, name, email } = user;
+  const { name, email } = user;
 
   const handleLogOut = async () => {
     const loggedOut = await logOutAccount();
 
-    if (loggedOut) {
+    if (!loggedOut) {
       router.push("/sign-in");
     }
   };
