@@ -39,12 +39,35 @@ export const AuthForm = ({ type }: Props) => {
 
   // 2. Define a submit handler.
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
-    const { email, password } = values;
+    const {
+      email,
+      password,
+      firstName,
+      lastName,
+      address1,
+      city,
+      state,
+      postalCode,
+      dateOfBirth,
+      ssn,
+    } = values;
     setLoading(true);
     try {
       // Sing up with Appwrite & create plaid link token
       if (type === "sign-up") {
-        const newUser = await signUp(values);
+        const userData = {
+          firstName: firstName!,
+          lastName: lastName!,
+          address1: address1!,
+          city: city!,
+          state: state!,
+          postalCode: postalCode!,
+          dateOfBirth: dateOfBirth!,
+          ssn: ssn!,
+          email,
+          password,
+        };
+        const newUser = await signUp(userData);
         setUser(newUser);
       }
       if (type === "sign-in") {

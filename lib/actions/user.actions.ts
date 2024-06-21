@@ -67,8 +67,8 @@ export const signUp = async (userData: SignUpParams) => {
     const dwollaCustomerId = extractCustomerIdFromUrl(dwollaCustomerURL);
 
     const newUser = await database.createDocument(
-      DATABASE_ID,
-      USER_COLLECTION_ID,
+      DATABASE_ID!,
+      USER_COLLECTION_ID!,
       ID.unique(),
       {
         ...userData,
