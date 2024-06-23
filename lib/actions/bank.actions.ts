@@ -9,11 +9,11 @@ import {
   TransferType,
 } from "plaid";
 
+import { plaidClient } from "../plaid";
 import { parseStringify } from "../utils";
 
 // import { getTransactionsByBankId } from "./transaction.actions";
 import { getBanks, getBank } from "./user.actions";
-import { plaidClient } from "../plaid";
 
 // Get multiple bank accounts belonging to a specific user
 export const getAccounts = async ({ userId }: getAccountsProps) => {

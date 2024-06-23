@@ -1,6 +1,6 @@
 "use server";
 
-import { ID } from "node-appwrite";
+import { ID, Query } from "node-appwrite";
 import { createAdminClient, createSessionClient } from "../appwrite";
 import { cookies } from "next/headers";
 import { encryptId, extractCustomerIdFromUrl, parseStringify } from "../utils";
@@ -19,6 +19,12 @@ const {
   APPWRITE_USER_COLLECTION_ID: USER_COLLECTION_ID,
   APPWRITE_BANK_COLLECTION_ID: BANK_COLLECTION_ID,
 } = process.env;
+
+/*
+  |==============================
+  | AUTH ACTIONS
+  |==============================
+*/
 
 /**
  * Signs in a user with the provided email and password.
@@ -119,6 +125,12 @@ export const logOutAccount = async () => {
     return null;
   }
 };
+
+/*
+  |==============================
+  | PLAID + DWOLLA ACTIONS
+  |==============================
+*/
 
 export const createLinkToken = async (user: User) => {
   try {
@@ -230,5 +242,27 @@ export const exchangePublicToken = async ({
     });
   } catch (error) {
     console.error("An error occurred while creating exchanging token:", error);
+  }
+};
+
+/*
+  |==============================
+  | BANK ACTIONS
+  |==============================
+*/
+
+export const getBanks = async ({ userId }: getBanksProps) => {
+  try {
+    const { database } = await createAdminClient();
+
+    const banks = await database.listDocuments(
+      DATABASE_ID!,
+      BANK_COLLECTION_ID!,
+      [Query.equal("userID", [userId])]
+    );
+
+    return parseStringify(banks.documents);
+  } catch (error) {
+    console.error("An error occurred while getting the banks", error);
   }
 };
