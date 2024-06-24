@@ -1,10 +1,10 @@
 import { HeaderBox, RightSidebar, TotalBalanceBox } from "@/components/index";
-import { getAccounts } from "@/lib/actions/bank.actions";
+import { getAccount, getAccounts } from "@/lib/actions/bank.actions";
 import { getLoggedInUser } from "@/lib/actions/user.actions";
 import { redirect } from "next/navigation";
 
 const Home = async ({ searchParams: { id, page } }: SearchParamProps) => {
-  let loggedIn = await getLoggedInUser();
+  let loggedIn: User = await getLoggedInUser();
   const accounts = await getAccounts({ userId: loggedIn.$id });
 
   if (!loggedIn) {
@@ -25,7 +25,7 @@ const Home = async ({ searchParams: { id, page } }: SearchParamProps) => {
           <HeaderBox
             type="greeting"
             title="Welcome,"
-            userName={loggedIn?.name || "Guest"}
+            userName={loggedIn?.firstName || "Guest"}
             subtext="Access and manage your account and transactions efficiently."
           />
           <TotalBalanceBox
