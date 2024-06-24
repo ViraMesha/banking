@@ -26,12 +26,24 @@ const {
   |==============================
 */
 
-/**
- * Signs in a user with the provided email and password.
- * @param {SignInProps} email - The email of the user.
- * @param {SignInProps} password - The password of the user.
- * @returns {Promise<string>} A promise that resolves to a response string after signing in.
- */
+// get database user
+export const getUserInfo = async ({ userId }: getUserInfoProps) => {
+  try {
+    const { database } = await createAdminClient();
+
+    const user = await database.listDocuments(
+      DATABASE_ID!,
+      USER_COLLECTION_ID!,
+      [Query.equal("userId", [userId])]
+    );
+
+    return parseStringify(user.documents[0]);
+  } catch (error) {
+    console.error("An error occurred while getting the user info", error);
+  }
+};
+
+//Signs in a user with the provided email and password.
 export const signIn = async ({ email, password }: SignInProps) => {
   try {
     const { account } = await createSessionClient();
@@ -45,6 +57,7 @@ export const signIn = async ({ email, password }: SignInProps) => {
       secure: true,
     });
 
+    // get full user info coming from the database
     const user = await getUserInfo({ userId: session.userId });
 
     return parseStringify(user);
@@ -116,7 +129,10 @@ export const signUp = async ({ password, ...userData }: SignUpParams) => {
 export const getLoggedInUser = async () => {
   try {
     const { account } = await createSessionClient();
-    const user = await account.get();
+    const result = await account.get();
+
+    const user = await getUserInfo({ userId: result.$id });
+
     return parseStringify(user);
   } catch (error) {
     console.error("Failed to get logged-in user:", error);
@@ -290,6 +306,6 @@ export const getBank = async ({ documentId }: getBankProps) => {
 
     return parseStringify(bank.documents[0]);
   } catch (error) {
-    console.error("An error occurred while getting the banks", error);
+    console.error("An error occurred while getting the bank", error);
   }
 };
