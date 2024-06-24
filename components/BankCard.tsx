@@ -8,6 +8,7 @@ export const BankCard = ({
   showBalance = true,
 }: CreditCardProps) => {
   const { name, currentBalance, mask } = account;
+
   return (
     <div className="flex flex-col">
       <Link href="/" className="bank-card">

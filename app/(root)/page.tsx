@@ -5,7 +5,11 @@ import { redirect } from "next/navigation";
 
 const Home = async ({ searchParams: { id, page } }: SearchParamProps) => {
   let loggedIn: User = await getLoggedInUser();
-  const accounts = await getAccounts({ userId: loggedIn.$id });
+  const accounts = await getAccounts({
+    userId: loggedIn.$id,
+  });
+
+  console.log("accounts", accounts);
 
   if (!loggedIn) {
     redirect("/sign-in");
