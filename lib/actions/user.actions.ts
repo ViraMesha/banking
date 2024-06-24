@@ -35,10 +35,19 @@ const {
 export const signIn = async ({ email, password }: SignInProps) => {
   try {
     const { account } = await createSessionClient();
-    const response = await account.createEmailPasswordSession(email, password);
-    console.log("Response in Sign In", response);
 
-    return parseStringify(response);
+    const session = await account.createEmailPasswordSession(email, password);
+
+    cookies().set("appwrite-session", session.secret, {
+      path: "/",
+      httpOnly: true,
+      sameSite: "strict",
+      secure: true,
+    });
+
+    const user = await getUserInfo({ userId: session.userId });
+
+    return parseStringify(user);
   } catch (error) {
     console.error("Error", error);
   }
