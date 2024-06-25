@@ -1,6 +1,11 @@
-import { HeaderBox, RightSidebar, TotalBalanceBox } from "@/components/index";
-import { getAccount, getAccounts } from "@/lib/actions/bank.actions";
-import { getLoggedInUser } from "@/lib/actions/user.actions";
+import {
+  HeaderBox,
+  RecentTransactions,
+  RightSidebar,
+  TotalBalanceBox,
+} from "@/components/index";
+import { getAccount, getAccounts, getLoggedInUser } from "@/lib/actions";
+
 import { redirect } from "next/navigation";
 
 const Home = async ({ searchParams: { id, page } }: SearchParamProps) => {
@@ -8,8 +13,6 @@ const Home = async ({ searchParams: { id, page } }: SearchParamProps) => {
   const accounts = await getAccounts({
     userId: loggedIn.$id,
   });
-
-  console.log("accounts", accounts);
 
   if (!loggedIn) {
     redirect("/sign-in");
@@ -38,7 +41,7 @@ const Home = async ({ searchParams: { id, page } }: SearchParamProps) => {
             totalCurrentBalance={accounts?.totalCurrentBalance}
           />
         </header>
-        RECENT TRANSACTIONS
+        <RecentTransactions />
       </div>
       <RightSidebar
         user={loggedIn}
