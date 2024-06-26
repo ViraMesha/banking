@@ -11,3 +11,4 @@ export { CustomInput } from "./CustomInput";
 export { Footer } from "./Footer";
 export { PlaidLink } from "./PlaidLink";
 export { RecentTransactions } from "./RecentTransactions";
+export { BankTabItem } from "./BankTabItem";

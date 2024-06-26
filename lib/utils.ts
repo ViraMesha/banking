@@ -88,6 +88,13 @@ interface UrlQueryParams {
   value: string;
 }
 
+/**
+ * Function to update or add a key-value pair to the URL query parameters.
+ * @param params - The current URL query parameters in object form.
+ * @param key - The key to update or add in the URL query parameters.
+ * @param value - The value corresponding to the key to update or add in the URL query parameters.
+ * @returns A string representing the updated URL with the modified query parameters.
+ */
 export function formUrlQuery({ params, key, value }: UrlQueryParams) {
   const currentUrl = qs.parse(params);
 
