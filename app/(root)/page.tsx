@@ -9,6 +9,7 @@ import { getAccount, getAccounts, getLoggedInUser } from "@/lib/actions";
 import { redirect } from "next/navigation";
 
 const Home = async ({ searchParams: { id, page } }: SearchParamProps) => {
+  const currentPage = Number(page as string) || 1;
   let loggedIn: User = await getLoggedInUser();
   const accounts = await getAccounts({
     userId: loggedIn.$id,
@@ -41,7 +42,12 @@ const Home = async ({ searchParams: { id, page } }: SearchParamProps) => {
             totalCurrentBalance={accounts?.totalCurrentBalance}
           />
         </header>
-        <RecentTransactions />
+        <RecentTransactions
+          accounts={accountsData}
+          transactions={account?.transactions}
+          appwriteItemId={appwriteItemId}
+          page={currentPage}
+        />
       </div>
       <RightSidebar
         user={loggedIn}
