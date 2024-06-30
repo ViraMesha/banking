@@ -13,3 +13,4 @@ export { PlaidLink } from "./PlaidLink";
 export { RecentTransactions } from "./RecentTransactions";
 export { BankTabItem } from "./BankTabItem";
 export { BankInfo } from "./BankInfo";
+export { TransactionsTable } from "./TransactionsTable";

@@ -194,6 +194,12 @@ export function decryptId(id: string) {
   return atob(id);
 }
 
+/**
+ * Determines the status of a transaction based on the provided date.
+ * If the date is within the last two days, the status is "Processing", otherwise it is "Success".
+ * @param date - The date of the transaction to check
+ * @returns The status of the transaction ("Processing" or "Success")
+ */
 export const getTransactionStatus = (date: Date) => {
   const today = new Date();
   const twoDaysAgo = new Date(today);

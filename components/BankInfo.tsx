@@ -30,7 +30,7 @@ export const BankInfo = ({ account, appwriteItemId, type }: BankInfoProps) => {
   const { bg, lightBg, title, subText } = colors;
 
   return (
-    <button
+    <div
       onClick={handleBankChange}
       className={cn(`bank-info ${bg}`, {
         "shadow-sm border-blue-700": type === "card" && isActive,
@@ -69,6 +69,6 @@ export const BankInfo = ({ account, appwriteItemId, type }: BankInfoProps) => {
           {formatAmount(currentBalance)}
         </p>
       </div>
-    </button>
+    </div>
   );
 };

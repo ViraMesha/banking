@@ -1,9 +1,11 @@
+import { Fragment } from "react";
 import Link from "next/link";
 
 // shadcn components
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Fragment } from "react";
-import { BankTabItem } from "./BankTabItem";
+
+// custom components
+import { BankTabItem, BankInfo, TransactionsTable } from "./index";
 
 export const RecentTransactions = ({
   accounts,
@@ -47,7 +49,14 @@ export const RecentTransactions = ({
                 value={appwriteItemId}
                 key={id}
                 className="space-y-4"
-              ></TabsContent>
+              >
+                <BankInfo
+                  account={account}
+                  appwriteItemId={appwriteItemId}
+                  type="full"
+                />
+                <TransactionsTable transactions={transactions} />
+              </TabsContent>
             </Fragment>
           );
         })}
