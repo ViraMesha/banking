@@ -14,6 +14,7 @@ import {
   removeSpecialCharacters,
 } from "@/lib/utils";
 import { Fragment } from "react";
+import { CategoryBadge } from "./CategoryBadge";
 
 export const TransactionsTable = ({ transactions }: TransactionTableProps) => {
   return (
@@ -61,7 +62,9 @@ export const TransactionsTable = ({ transactions }: TransactionTableProps) => {
                   {isDebit ? `-${amount}` : isCredit ? amount : amount}
                 </TableCell>
 
-                <TableCell className="pl-2 pr-10">{status}</TableCell>
+                <TableCell className="pl-2 pr-10">
+                  <CategoryBadge category={status} />
+                </TableCell>
 
                 <TableCell className="pl-2 pr-10 min-w-32">
                   {date.dateTime}
@@ -70,7 +73,7 @@ export const TransactionsTable = ({ transactions }: TransactionTableProps) => {
                   {paymentChannel}
                 </TableCell>
                 <TableCell className="pl-2 pr-10 max-md:hidden">
-                  {category}
+                  <CategoryBadge category={category} />
                 </TableCell>
               </TableRow>
             </Fragment>
