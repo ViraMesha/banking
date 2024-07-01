@@ -39,21 +39,39 @@ export const TransactionsTable = ({ transactions }: TransactionTableProps) => {
 
           return (
             <Fragment key={id}>
-              <TableRow>
-                <TableCell>
-                  <div>
-                    <h1>{removeSpecialCharacters(name)}</h1>
+              <TableRow
+                className={`${
+                  isDebit || amount[0] === "-" ? "bg-[#FFfbfa]" : "bg-[#f6fef9]"
+                } !over:bg-none !border-b-default`}
+              >
+                <TableCell className="max-w-[250px] pl-2 pr-10">
+                  <div className="flex items-center gap-3">
+                    <h1 className="text-14 truncate font-semibold text-[#344054]">
+                      {removeSpecialCharacters(name)}
+                    </h1>
                   </div>
                 </TableCell>
-                <TableCell>
+                <TableCell
+                  className={`pl-2 pr-10 font-semibold ${
+                    isDebit || amount[0] === "-"
+                      ? "text-[#f04438]"
+                      : "text-[#039855]"
+                  }`}
+                >
                   {isDebit ? `-${amount}` : isCredit ? amount : amount}
                 </TableCell>
 
-                <TableCell>{status}</TableCell>
+                <TableCell className="pl-2 pr-10">{status}</TableCell>
 
-                <TableCell>{date.dateTime}</TableCell>
-                <TableCell>{paymentChannel}</TableCell>
-                <TableCell>{category}</TableCell>
+                <TableCell className="pl-2 pr-10 min-w-32">
+                  {date.dateTime}
+                </TableCell>
+                <TableCell className="pl-2 pr-10 capitalize min-w-24">
+                  {paymentChannel}
+                </TableCell>
+                <TableCell className="pl-2 pr-10 max-md:hidden">
+                  {category}
+                </TableCell>
               </TableRow>
             </Fragment>
           );
