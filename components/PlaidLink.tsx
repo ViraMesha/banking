@@ -7,6 +7,7 @@ import {
   createLinkToken,
   exchangePublicToken,
 } from "@/lib/actions/user.actions";
+import Image from "next/image";
 
 export const PlaidLink = ({ user, variant }: PlaidLinkProps) => {
   const router = useRouter();
@@ -46,9 +47,31 @@ export const PlaidLink = ({ user, variant }: PlaidLinkProps) => {
           Connect bank
         </Button>
       ) : variant === "ghost" ? (
-        <Button>Connect bank</Button>
+        <Button
+          onClick={() => open()}
+          className="plaidlink-ghost"
+          variant="ghost"
+        >
+          <Image
+            src="icons/connect-bank.svg"
+            alt="connect bank"
+            width={24}
+            height={24}
+          />
+          <p className="text-[16px] font-semibold text-black-2 hidden xl:block">
+            Connect bank
+          </p>
+        </Button>
       ) : (
-        <Button>Connect bank</Button>
+        <Button onClick={() => open()} className="plaidlink-default">
+          <Image
+            src="icons/connect-bank.svg"
+            alt="connect bank"
+            width={24}
+            height={24}
+          />
+          <p className="text-[16px] font-semibold text-black-2">Connect bank</p>
+        </Button>
       )}
     </>
   );

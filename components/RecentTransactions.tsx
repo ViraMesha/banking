@@ -27,10 +27,10 @@ export const RecentTransactions = ({
       <Tabs defaultValue={appwriteItemId} className="w-full">
         <TabsList className="recent-transactions-tablist">
           {accounts.map((account: Account) => {
-            const { id, appwriteItemId } = account;
+            const { id } = account;
             return (
               <Fragment key={id}>
-                <TabsTrigger value={appwriteItemId}>
+                <TabsTrigger value={account.appwriteItemId}>
                   <BankTabItem
                     key={id}
                     account={account}
