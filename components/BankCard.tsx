@@ -1,6 +1,7 @@
 import { formatAmount } from "@/lib/utils";
 import Image from "next/image";
 import Link from "next/link";
+import { Copy } from "./index";
 
 export const BankCard = ({
   account,
@@ -58,7 +59,7 @@ export const BankCard = ({
           className="absolute top-0 left-0"
         />
       </Link>
-      {/* COPY */}
+      {showBalance && <Copy title={account?.sharableId} />}
     </div>
   );
 };

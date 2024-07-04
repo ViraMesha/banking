@@ -15,3 +15,4 @@ export { BankTabItem } from "./BankTabItem";
 export { BankInfo } from "./BankInfo";
 export { TransactionsTable } from "./TransactionsTable";
 export { CategoryBadge } from "./CategoryBadge";
+export { Copy } from "./Copy";
