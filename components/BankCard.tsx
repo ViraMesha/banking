@@ -7,11 +7,14 @@ export const BankCard = ({
   userName,
   showBalance = true,
 }: CreditCardProps) => {
-  const { name, currentBalance, mask } = account;
+  const { name, currentBalance, mask, appwriteItemId } = account;
 
   return (
     <div className="flex flex-col">
-      <Link href="/" className="bank-card">
+      <Link
+        href={`/transaction-history/?id=${appwriteItemId}`}
+        className="bank-card"
+      >
         <div className="bank-card_content">
           <div>
             <h2 className="text-16 font-semibold text-white">
@@ -27,8 +30,8 @@ export const BankCard = ({
               <h3 className="text-12 font-semibold text-white">** / **</h3>
             </div>
             <p className="text-14 font-semibold tracking-[1.1px] text-white">
-              **** **** **** 3145
-              <span className="text-16">{mask}</span>
+              **** **** ****
+              <span className="text-16"> {mask}</span>
             </p>
           </article>
         </div>

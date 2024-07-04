@@ -12,10 +12,6 @@ export default async function TransactionHistory({
     userId: loggedIn.$id,
   });
 
-  if (!loggedIn) {
-    redirect("/sign-in");
-  }
-
   if (!accounts) return;
 
   const accountsData = accounts?.data;
@@ -39,8 +35,7 @@ export default async function TransactionHistory({
             </h2>
             <p className="text-14 text-blue-25">{account?.data.officialName}</p>
             <p className="text-14 font-semibold tracking-[1.1px] text-white">
-              **** **** ****
-              <span className="text-16">{account?.data.mask}</span>
+              **** **** **** {account?.data.mask}
             </p>
           </div>
           <div className="transactions-account-balance">
