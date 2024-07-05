@@ -16,3 +16,4 @@ export { BankInfo } from "./BankInfo";
 export { TransactionsTable } from "./TransactionsTable";
 export { CategoryBadge } from "./CategoryBadge";
 export { Copy } from "./Copy";
+export { BankDropdown } from "./BankDropdown";
