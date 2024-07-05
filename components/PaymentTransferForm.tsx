@@ -9,7 +9,7 @@ import * as z from "zod";
 
 import { createTransfer } from "@/lib/actions/dwolla.actions";
 import { createTransaction } from "@/lib/actions/transaction.actions";
-import { getBank, getBankByAccountId } from "@/lib/actions/user.actions";
+import { getBank, getBankByAccountId } from "@/lib/actions/index";
 import { decryptId } from "@/lib/utils";
 
 import { BankDropdown } from "./index";
