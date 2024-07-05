@@ -10,7 +10,7 @@ import * as z from "zod";
 import { createTransfer } from "@/lib/actions/dwolla.actions";
 import { createTransaction } from "@/lib/actions/transaction.actions";
 import { getBank, getBankByAccountId } from "@/lib/actions/index";
-import { decryptId } from "@/lib/utils";
+import { decryptId, transferFormSchema } from "@/lib/utils";
 
 import { BankDropdown } from "./index";
 import { Button } from "./ui/button";
@@ -26,20 +26,12 @@ import {
 import { Input } from "./ui/input";
 import { Textarea } from "./ui/textarea";
 
-const formSchema = z.object({
-  email: z.string().email("Invalid email address"),
-  name: z.string().min(4, "Transfer note is too short"),
-  amount: z.string().min(4, "Amount is too short"),
-  senderBank: z.string().min(4, "Please select a valid bank account"),
-  sharableId: z.string().min(8, "Please select a valid sharable Id"),
-});
-
 export const PaymentTransferForm = ({ accounts }: PaymentTransferFormProps) => {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
 
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
+  const form = useForm<z.infer<typeof transferFormSchema>>({
+    resolver: zodResolver(transferFormSchema),
     defaultValues: {
       name: "",
       email: "",
@@ -49,7 +41,7 @@ export const PaymentTransferForm = ({ accounts }: PaymentTransferFormProps) => {
     },
   });
 
-  const submit = async (data: z.infer<typeof formSchema>) => {
+  const submit = async (data: z.infer<typeof transferFormSchema>) => {
     setIsLoading(true);
 
     try {
