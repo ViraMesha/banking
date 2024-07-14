@@ -6,6 +6,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 // custom components
 import { BankTabItem, BankInfo, TransactionsTable, Pagination } from "./index";
+import { paginateTransactions } from "@/lib/utils";
 
 export const RecentTransactions = ({
   accounts,
@@ -13,14 +14,10 @@ export const RecentTransactions = ({
   appwriteItemId,
   page = 1,
 }: RecentTransactionsProps) => {
-  const rowsPerPage = 10;
-  const totalPages = Math.ceil(transactions.length / rowsPerPage);
-  const indexOfLastTransaction = page * rowsPerPage;
-  const indexOfFirstTransaction = indexOfLastTransaction - rowsPerPage;
-  const currentTransactions = transactions.slice(
-    indexOfFirstTransaction,
-    indexOfLastTransaction
-  );
+  const { currentTransactions, totalPages } = paginateTransactions({
+    transactions,
+    currentPage: page,
+  });
 
   return (
     <section className="recent-transactions">

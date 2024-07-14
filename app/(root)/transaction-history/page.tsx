@@ -1,7 +1,7 @@
 import { redirect } from "next/navigation";
 import { HeaderBox, TransactionsTable, Pagination } from "@/components/index";
 import { getAccount, getAccounts, getLoggedInUser } from "@/lib/actions";
-import { formatAmount } from "@/lib/utils";
+import { formatAmount, paginateTransactions } from "@/lib/utils";
 
 export default async function TransactionHistory({
   searchParams: { id, page },
@@ -19,14 +19,10 @@ export default async function TransactionHistory({
 
   const account = await getAccount({ appwriteItemId });
 
-  const rowsPerPage = 10;
-  const totalPages = Math.ceil(account?.transactions.length / rowsPerPage);
-  const indexOfLastTransaction = currentPage * rowsPerPage;
-  const indexOfFirstTransaction = indexOfLastTransaction - rowsPerPage;
-  const currentTransactions = account?.transactions.slice(
-    indexOfFirstTransaction,
-    indexOfLastTransaction
-  );
+  const { currentTransactions, totalPages } = paginateTransactions({
+    transactions: account?.transactions,
+    currentPage,
+  });
 
   return (
     <div className="transactions">

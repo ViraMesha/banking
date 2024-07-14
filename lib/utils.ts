@@ -233,3 +233,19 @@ export const transferFormSchema = z.object({
   senderBank: z.string().min(4, "Please select a valid bank account"),
   sharableId: z.string().min(8, "Please select a valid sharable Id"),
 });
+
+export const paginateTransactions = ({
+  transactions,
+  currentPage,
+  rowsPerPage = 10,
+}: paginateTransactionsProps) => {
+  const totalPages = Math.ceil(transactions.length / rowsPerPage);
+  const indexOfLastTransaction = currentPage * rowsPerPage;
+  const indexOfFirstTransaction = indexOfLastTransaction - rowsPerPage;
+  const currentTransactions = transactions.slice(
+    indexOfFirstTransaction,
+    indexOfLastTransaction
+  );
+
+  return { currentTransactions, totalPages };
+};

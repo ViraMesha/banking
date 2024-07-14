@@ -328,3 +328,9 @@ declare interface getBankProps {
 declare interface getBankByAccountIdProps {
   accountId: string;
 }
+
+declare interface paginateTransactionsProps {
+  transactions: Transaction[];
+  currentPage: number;
+  rowsPerPage?: number;
+}
