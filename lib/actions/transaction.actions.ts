@@ -28,7 +28,7 @@ export const createTransaction = async (
 
     return parseStringify(newTransaction);
   } catch (error) {
-    console.log(error);
+    console.error(error);
   }
 };
 
@@ -40,14 +40,14 @@ export const getTransactionsByBankId = async ({
 
     const senderTransactions = await database.listDocuments(
       DATABASE_ID!,
-      TRANSACTION_COLLECTION_ID!
-      // [Query.equal("senderBankId", bankId)]
+      TRANSACTION_COLLECTION_ID!,
+      [Query.equal("senderBankId", bankId)]
     );
 
     const receiverTransactions = await database.listDocuments(
       DATABASE_ID!,
-      TRANSACTION_COLLECTION_ID!
-      // [Query.equal("receiverBankId", bankId)]
+      TRANSACTION_COLLECTION_ID!,
+      [Query.equal("receiverBankId", bankId)]
     );
 
     const transactions = {
