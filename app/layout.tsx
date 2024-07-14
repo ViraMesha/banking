@@ -24,10 +24,8 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${inter.variable} ${ibmPlexSerif.variable} overflow-x-clip`}
-      >
-        {children}
+      <body className={`${inter.variable} ${ibmPlexSerif.variable}`}>
+        <div className="min-h-full flex flex-col overflow-clip">{children}</div>
       </body>
     </html>
   );

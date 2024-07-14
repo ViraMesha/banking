@@ -2,7 +2,10 @@ import Image from "next/image";
 import Link from "next/link";
 
 // components
-import { BankCard } from "./BankCard";
+import { BankCard, Category } from "./index";
+
+// utils
+import { countTransactionCategories } from "@/lib/utils";
 
 export const RightSidebar = ({
   user,
@@ -11,6 +14,8 @@ export const RightSidebar = ({
 }: RightSidebarProps) => {
   const { firstName, lastName, email } = user;
   const userName = `${firstName} ${lastName}`;
+  const categories: CategoryCount[] = countTransactionCategories(transactions);
+  console.log(categories)
 
   return (
     <aside className="right-sidebar">
@@ -61,6 +66,13 @@ export const RightSidebar = ({
             )}
           </div>
         )}
+        <div className="mt-10 flex flex-1 flex-col gap-6">
+          <h2 className="header-2">Top categories</h2>
+          {categories.map((category) => {
+            const { name } = category;
+            return <Category key={name} category={category} />;
+          })}
+        </div>
       </section>
     </aside>
   );
